@@ -37,7 +37,7 @@ const productSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    brand: {
+    brand123: {
         type: String
     }
 }, {
