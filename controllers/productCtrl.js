@@ -30,7 +30,7 @@ class APIfeatures {
     }
     paging() {
         const page = this.query_string.page * 1 || 1
-        const limit = this.query_string.limit * 1 || 18 ///Limit product in one page
+        const limit = this.query_string.limit * 1 || 30 ///Limit product in one page
         const skip = (page - 1) * limit
         this.query = this.query.skip(skip).limit(limit)
         return this
@@ -54,7 +54,7 @@ const productCtrl = {
     },
     createProduct: async(req, res) => {
         try {
-            const { product_id, title, price, description, content, images, category } = req.body
+            const { product_id, title, price, description, content, images, category, brand } = req.body
             if (!images) return res.status(400).json({ msg: "No image upload" })
             const product = await Products.findOne({ product_id })
             if (product)
@@ -66,7 +66,8 @@ const productCtrl = {
                 description,
                 content,
                 images,
-                category
+                category,
+                brand
             })
             console.log("Create a product")
             await newProduct.save()
@@ -85,7 +86,7 @@ const productCtrl = {
     },
     updateProduct: async(req, res) => {
         try {
-            const { title, price, description, content, images, category } = req.body
+            const { title, price, description, content, images, category, brand } = req.body
             if (!images) return res.status(400).json({ msg: "No images uploaded" })
             await Products.findOneAndUpdate({ _id: req.params.id }, {
                 title: title.toLowerCase(),
@@ -93,7 +94,8 @@ const productCtrl = {
                 description,
                 content,
                 images,
-                category
+                category,
+                brand
             })
             res.json({ msg: "Updated product" })
         } catch (err) {
