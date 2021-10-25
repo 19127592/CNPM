@@ -35,3 +35,13 @@ button{
 
 /*---------Header------------*/
 @import url("./components/header/header.css");
+
+
+/*---------Products------------*/
+@import url("./components/mainpage/products/products.css");
+
+/*---------Detail Product------------*/
+@import url("./components/mainpage/productDetail/ProductDetail.css");
+
+/*---------Login/Register-----------*/
+@import url("./components/mainpage/auth/Login.css");
