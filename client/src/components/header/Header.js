@@ -1,8 +1,8 @@
 import React,{useState,useContext} from 'react'
 import {GlobalState} from '../../GlobalState'
-import Menu from './icon/menu.svg'
-import Close from './icon/close.svg'
-import Cart from './icon/cart.svg'
+import Menu from './menu.svg'
+import Close from './close.svg'
+import Cart from './cart.svg'
 import { Link } from 'react-router-dom'
 export default function Header() {
     const value = useContext(GlobalState)

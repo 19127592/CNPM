@@ -2,25 +2,25 @@ const Products = require('../models/productModel')
 
 //Filter, sorting and paginating
 class APIfeatures {
-    constructor(query, queryString) {
+    constructor(query, query_string) {
         this.query = query
-        this.queryString = queryString
+        this.query_string = query_string
     }
-    filtering() {
-        const queryObj = {...this.queryString }
+    filter() {
+        const obj_query = {...this.query_string }
 
-        const excludeFields = ['page', 'sort', 'limit']
-        excludeFields.forEach(el => delete(queryObj[el]))
+        const filterBy = ['page', 'sort', 'limit']
+        filterBy.forEach(element => delete(obj_query[element]))
 
-        let queryStr = JSON.stringify(queryObj)
-        queryStr = queryStr.replace(/\b(gte|gt|lt|lte|regex)\b/g, match => '$' + match)
+        let str_query = JSON.stringify(obj_query)
+        str_query = str_query.replace(/\b(gte|gt|lt|lte|regex)\b/g, match => '$' + match)
 
-        this.query.find(JSON.parse(queryStr))
+        this.query.find(JSON.parse(str_query))
         return this
     }
-    sorting() {
-        if (this.queryString.sort) {
-            const sortBy = this.queryString.sort.split(',').join(' ')
+    sort() {
+        if (this.query_string.sort) {
+            const sortBy = this.query_string.sort.split(',').join(' ')
             console.log(sortBy)
             this.query = this.query.sort(sortBy)
         } else {
@@ -28,9 +28,9 @@ class APIfeatures {
         }
         return this
     }
-    paginating() {
-        const page = this.queryString.page * 1 || 1
-        const limit = this.queryString.limit * 1 || 9 ///Limit product in one page
+    paging() {
+        const page = this.query_string.page * 1 || 1
+        const limit = this.query_string.limit * 1 || 30 ///Limit product in one page
         const skip = (page - 1) * limit
         this.query = this.query.skip(skip).limit(limit)
         return this
@@ -40,7 +40,7 @@ class APIfeatures {
 const productCtrl = {
     getProducts: async(req, res) => {
         try {
-            const features = new APIfeatures(Products.find(), req.query).filtering().sorting().paginating()
+            const features = new APIfeatures(Products.find(), req.query).filter().sort().paging()
 
             const products = await features.query
             res.json({
@@ -54,7 +54,7 @@ const productCtrl = {
     },
     createProduct: async(req, res) => {
         try {
-            const { product_id, title, price, description, content, images, category } = req.body
+            const { product_id, title, price, description, content, images, category, brand } = req.body
             if (!images) return res.status(400).json({ msg: "No image upload" })
             const product = await Products.findOne({ product_id })
             if (product)
@@ -66,7 +66,8 @@ const productCtrl = {
                 description,
                 content,
                 images,
-                category
+                category,
+                brand
             })
             console.log("Create a product")
             await newProduct.save()
@@ -85,7 +86,7 @@ const productCtrl = {
     },
     updateProduct: async(req, res) => {
         try {
-            const { title, price, description, content, images, category } = req.body
+            const { title, price, description, content, images, category, brand } = req.body
             if (!images) return res.status(400).json({ msg: "No images uploaded" })
             await Products.findOneAndUpdate({ _id: req.params.id }, {
                 title: title.toLowerCase(),
@@ -93,7 +94,8 @@ const productCtrl = {
                 description,
                 content,
                 images,
-                category
+                category,
+                brand
             })
             res.json({ msg: "Updated product" })
         } catch (err) {
