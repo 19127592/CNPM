@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 export default function Header() {
     const value = useContext(GlobalState)
     return (
+        //FE (Thu)
         <header>
             <div className='menu'>
                 <img src={Menu} alt="" width="30"/>

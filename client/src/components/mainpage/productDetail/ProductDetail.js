@@ -20,6 +20,7 @@ export default function ProductDetail() {
     
     return (
         <>
+        //FE (Thu)
         <div className='detail'>
             <img src={ProductDetail.images.url} alt=''/>
             <div className='box-detail'>

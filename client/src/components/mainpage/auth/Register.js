@@ -22,6 +22,7 @@ export default function Register() {
         }
     }
     return (
+        //FE (Thu)
         <div className='login-page'>
             <form onSubmit={register}>
             <input type="name" name="name" required

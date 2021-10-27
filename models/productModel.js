@@ -41,6 +41,37 @@ const productSchema = new mongoose.Schema(
     brand: {
       type: String,
     },
+    //Detail
+    CPU: {
+      type: String,
+    },
+    Screen:{
+      type: String,
+    },
+    RAM: {
+      type: String,
+    },
+    Bluetooth:{
+      type: Number,
+    },
+    OS:{
+      type: String,
+    },
+    GPU:{
+      type: String,
+    },
+    DoR: {
+      type: Date,
+    },
+    BatteryCapacity:{
+      type: Number,
+    },
+    Weight:{
+      type: Number,
+    },
+    Material:{
+      type: String
+    },
   },
   {
     timestamps: true,
