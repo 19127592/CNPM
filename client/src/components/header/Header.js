@@ -9,7 +9,7 @@ export default function Header() {
     const [Logged,isLogged] = state.userAPI.isLogged
     const [Admin,isAdmin] = state.userAPI.isAdmin
     const [Seller,isSeller] = state.userAPI.isSeller
-
+    const [cart] = state.userAPI.cart
     const sellerControl = () =>{
         return(
             <>
@@ -45,7 +45,7 @@ export default function Header() {
             </div>
             <div className='logo'>
                 <h1>
-                    <Link to="/">{isAdmin?'Admin':'rookieSE'}rookieSE</Link>
+                    <Link to="/">{Admin?'Admin':'rookieSE'}</Link>
                 </h1>
             </div>
             <ul>
@@ -56,7 +56,7 @@ export default function Header() {
                 </li>
             </ul>
             <div className='cart-icon'>
-                <span>0</span>
+                <span>{cart.length}</span>
                 <Link to='/cart'>
                     <img src={Cart} alt="" width="30"/>
                 </Link>

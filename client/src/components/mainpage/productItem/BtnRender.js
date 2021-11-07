@@ -4,9 +4,11 @@ import { GlobalState } from '../../../GlobalState'
 function BtnRender({product}) {
     const state = useContext(GlobalState)
     const [isAdmin] = state.userAPI.isAdmin
+    const addToCart = state.userAPI.addToCart
+
     return (
         <div className='row-btn'>
-                <Link id="btn-buy" to="#!">
+                <Link id="btn-buy" to="#!" onClick={() => addToCart(product)}>
                     Buy
                 </Link>
                 <Link id="btn-view" to={'/detail/'+product._id}>
