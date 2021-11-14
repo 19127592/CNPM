@@ -11,6 +11,7 @@ export default function Header() {
   const [Seller, isSeller] = state.userAPI.isSeller;
   const [cart] = state.userAPI.cart;
   const sellerControl = () => {
+      
     return (
       <>
         <li>
@@ -62,8 +63,8 @@ export default function Header() {
       </div>
       <div class="search-box">
         <form>
-          <input type="text" name="" placeholder="Search..." />
-          <input type="submit" name="" value="Search" />
+          <input type="text" name="" placeholder="Search..." className='search-field'/>
+          <input type="submit" name="" value="Search" className='search-btn'/>
         </form>
       </div>
       <ul>

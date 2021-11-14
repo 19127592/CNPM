@@ -52,7 +52,7 @@ input {
   transition: 0.5s;
 }
 
-input[type="text"] {
+.search-field {
   width: 350px;
   height: 35px;
   border: none;
@@ -61,7 +61,7 @@ input[type="text"] {
   border-radius: 25px 0 0 25px;
 }
 
-input[type="submit"] {
+.search-btn {
   padding: 0 25px;
   border-radius: 0 25px 25px 0;
   /* width: 70px; */
@@ -72,6 +72,6 @@ input[type="submit"] {
   background: #c7c6c6;
 }
 
-input[type="submit"]:hover {
+.search-btn:hover {
   background: #838181;
 }
