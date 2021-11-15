@@ -12,21 +12,23 @@ export default function Header() {
   const [isSeller] = state.userAPI.isSeller;
   const [cart] = state.userAPI.cart;
 
-  const logOut = async() => {
-    await axios.get('/user/logout')
-    localStorage.clear()
-    window.location.href = '/';
-  }
+  const logOut = async () => {
+    await axios.get("/user/logout");
+    localStorage.clear();
+    window.location.href = "/";
+  };
 
   const sellerControl = () => {
-      
     return (
       <>
         <li>
-          <Link to="/create_product">Create product</Link>
+          <Link to="/create_product">Create Product</Link>
         </li>
         <li>
           <Link to="/category">Category</Link>
+        </li>
+        <li>
+          <Link to="/update">Data Management</Link>
         </li>
       </>
     );
@@ -36,10 +38,10 @@ export default function Header() {
     return (
       <>
         <li>
-          <Link to="/create_product">Create product</Link>
+          <Link to="/user_management">User management</Link>
         </li>
         <li>
-          <Link to="/category">Category</Link>
+          <Link to="/user_management">Data management</Link>
         </li>
       </>
     );
@@ -71,8 +73,13 @@ export default function Header() {
       </div>
       <div class="search-box">
         <form>
-          <input type="text" name="" placeholder="Search..." className='search-field'/>
-          <input type="submit" name="" value="Search" className='search-btn'/>
+          <input
+            type="text"
+            name=""
+            placeholder="Search..."
+            className="search-field"
+          />
+          <input type="submit" name="" value="Search" className="search-btn" />
         </form>
       </div>
       <ul>
