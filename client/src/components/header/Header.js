@@ -4,12 +4,20 @@ import Menu from "./menu.svg";
 import Close from "./close.svg";
 import Cart from "./cart.svg";
 import { Link } from "react-router-dom";
+import axios from "axios";
 export default function Header() {
   const state = useContext(GlobalState);
-  const [Logged, isLogged] = state.userAPI.isLogged;
-  const [Admin, isAdmin] = state.userAPI.isAdmin;
-  const [Seller, isSeller] = state.userAPI.isSeller;
+  const [isLogged] = state.userAPI.isLogged;
+  const [isAdmin] = state.userAPI.isAdmin;
+  const [isSeller] = state.userAPI.isSeller;
   const [cart] = state.userAPI.cart;
+
+  const logOut = async() => {
+    await axios.get('/user/logout')
+    localStorage.clear()
+    window.location.href = '/';
+  }
+
   const sellerControl = () => {
       
     return (
@@ -58,7 +66,7 @@ export default function Header() {
       </div>
       <div className="logo">
         <h1>
-          <Link to="/">{Admin ? "Admin" : "rookieSE"}</Link>
+          <Link to="/">{isAdmin ? "Admin" : "rookieSE"}</Link>
         </h1>
       </div>
       <div class="search-box">

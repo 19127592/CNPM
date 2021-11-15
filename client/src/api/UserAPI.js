@@ -47,7 +47,7 @@ export default function UserAPI(token) {
         isLogged: [Logged,isLogged],
         isAdmin: [Admin, isAdmin],
         isSeller: [Seller,isSeller],
-        cart: [cart],
+        cart: [cart, setCart],
         addToCart:addCart
     }
 }
