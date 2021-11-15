@@ -67,7 +67,7 @@ export default function Register() {
               Register
             </button>
             <button type="submit" className="re-re-btn">
-              <Link to="/register">Login</Link>
+              <Link to="/login">Login</Link>
             </button>
           </div>
         </form>

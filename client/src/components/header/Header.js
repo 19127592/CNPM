@@ -18,28 +18,32 @@ export default function Header() {
     window.location.href = "/";
   };
 
-  const sellerControl = () => {
+  const loggedControl = () => {
     return (
       <>
         <li>
-          <Link to="/create_product">Create Product</Link>
-        </li>
-        <li>
-          <Link to="/category">Category</Link>
-        </li>
-        <li>
-          <Link to="/update">Data Management</Link>
+          <Link to="/" onClick={logOut}>
+            Logout
+          </Link>
         </li>
       </>
     );
   };
 
-  const adminControl = () => {
+  const sellerControl = () => {
     return (
       <>
         <li>
-          <Link to="/user_management">User management</Link>
+          <Link to="/update">Product Management</Link>
         </li>
+      </>
+    );
+  };
+  /*create product nam trong product management */
+
+  const adminControl = () => {
+    return (
+      <>
         <li>
           <Link to="/user_management">Data management</Link>
         </li>
@@ -47,18 +51,6 @@ export default function Header() {
     );
   };
 
-  const loggedControl = () => {
-    return (
-      <>
-        <li>
-          <Link to="/history">History</Link>
-        </li>
-        <li>
-          <Link to="/">Log out</Link>
-        </li>
-      </>
-    );
-  };
   console.log(state);
   return (
     //FE (Thu)
@@ -84,11 +76,17 @@ export default function Header() {
       </div>
       <ul>
         <li>
-          <Link to="/">Products</Link>
+          <Link to="/">
+            {isAdmin ? adminControl() : isSeller ? sellerControl() : "Product"}
+          </Link>
         </li>
-        <li>
-          <Link to="/login">Login & Register</Link>
-        </li>
+        {isLogged ? (
+          loggedControl()
+        ) : (
+          <li>
+            <Link to="/login">Login & Register</Link>
+          </li>
+        )}
         <li>
           <img src={Close} alt="" width="30" className="menu" />
         </li>
@@ -102,3 +100,6 @@ export default function Header() {
     </header>
   );
 }
+
+/*lam icon account, khong xoa log out*/
+/**/
