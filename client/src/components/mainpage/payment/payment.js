@@ -34,19 +34,24 @@ export default function Payment() {
     const confirmOrder = async(e) => {
         
         setTotalCash(parseInt(shipFee) + total + total*10/100)
+        console.log(infor)
         const message = "Confirm your order\nPayment Method: " + order.payment
         const message1 = "\nDelivery Time: " + order.delivery_time
         const message2 = "\nTotal Money: " + totalCash
         /* Add address confirmation */
-        window.confirm(message+message1+message2)
+        if (window.confirm(message+message1+message2) === true)
+        {
+            setOrder({...order,["ship_fee"]:parseInt(shipFee)})
+            setOrder({...order,["user_information"]:infor})
+            
+            
+            await axios.post('/user/addOrder',{...order},{
+                headers: {Authorization: token}
+            })
+        }
 
-        setOrder({...order,["ship_fee"]:parseInt(shipFee)})
-        setOrder({...order,["user_information"]:infor})
-        setOrder({...order,["progress"]:0})
-        
-        await axios.post('/user/addOrder',{...order},{
-            headers: {Authorization: token}
-        })
+
+            
 
         console.log(order)
     }

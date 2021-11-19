@@ -23,10 +23,6 @@ const orderSchema = new mongoose.Schema(
         type: Object,
         default:[],
         require: true,
-    },
-    progress:{
-      type: Number,
-      default: 0
     }
   },
   {
