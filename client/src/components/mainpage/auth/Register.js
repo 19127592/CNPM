@@ -62,6 +62,32 @@ export default function Register() {
               onChange={setUserPassword}
             />
           </div>
+          <div className="form-group">
+            <span className="form-title">Address</span>
+            <input
+              className="input-box"
+              type="address"
+              name="address"
+              required
+              autoComplete="on"
+              placeholder="Address"
+              value={user.address}
+              onChange={setUserPassword}
+            />
+          </div>
+          <div className="form-group">
+            <span className="form-title">Phone number</span>
+            <input
+              className="input-box"
+              type="phone"
+              name="phone"
+              required
+              autoComplete="on"
+              placeholder="Phone number"
+              value={user.phone}
+              onChange={setUserPassword}
+            />
+          </div>
           <div className="row">
             <button type="submit" className="re-btn">
               Register
