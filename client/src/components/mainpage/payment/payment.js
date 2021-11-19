@@ -42,7 +42,7 @@ export default function Payment() {
 
         setOrder({...order,["ship_fee"]:parseInt(shipFee)})
         setOrder({...order,["user_information"]:infor})
-
+        setOrder({...order,["progress"]:0})
         
         await axios.post('/user/addOrder',{...order},{
             headers: {Authorization: token}

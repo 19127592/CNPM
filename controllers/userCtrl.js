@@ -7,7 +7,7 @@ var check = false
 const userCtrl = {
     register: async(req, res) => {
         try {
-            const { name, email, password } = req.body;
+            const { name, email, password, address, phone } = req.body;
             const user = await Users.findOne({ email })
             if (user) return res.status(400).json({ msg: "The email already exists." })
             if (password != "") {
@@ -22,7 +22,9 @@ const userCtrl = {
             const newUser = new Users({
                 name,
                 email,
-                password: hash
+                password: hash,
+                address, 
+                phone
             })
             if (check) {
                 await newUser.save()
@@ -104,13 +106,14 @@ const userCtrl = {
     saveOrder: async(req,res) => {
         try {
             
-            const {ship_fee,payment, delivery_time} = req.body
+            const {ship_fee,payment, delivery_time, progress} = req.body
             
             const newOrder = new Order({
                 ship_fee,
                 payment,
                 delivery_time,
-                user_information: req.body.user_information
+                user_information: req.body.user_information,
+                progress
             })
             newOrder.save()
         } catch (err) {
