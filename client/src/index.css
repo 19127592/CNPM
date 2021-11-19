@@ -48,3 +48,5 @@ button{
 
 /*---------Cart-----------*/
 @import url("./components/mainpage/cart/cart.css");
+
+@import url("./components/mainpage/payment/payment.css");

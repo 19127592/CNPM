@@ -23,11 +23,18 @@
   background-color: #04AA6D;
   color: white;
 }
-.customers img{
-
+.img-item{
 width: 100px;
 height:100px;
+}
 
+.trash-can{
+  width: 18px;
+  height:18px;
+}
+
+.trash-can:hover{
+  cursor: pointer;
 }
 
 input,

@@ -51,7 +51,6 @@ export default function Header() {
     );
   };
 
-  console.log(state);
   return (
     //FE (Thu)
     <header>

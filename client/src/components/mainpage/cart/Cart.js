@@ -2,12 +2,16 @@ import React, { useContext, useState, useEffect } from "react";
 import { GlobalState } from "../../../GlobalState";
 import { useParams, Link } from "react-router-dom";
 import ReactDOM from "react-dom";
+import trash_can from './iconmonstr-trash-can-1.svg'
+import axios from 'axios'
+import Paypal from './paypal'
 
 function Cart() {
   const state = useContext(GlobalState);
   const [cart, setCart] = state.userAPI.cart;
+  const [token] = state.token
   const [total, setTotal] = useState(0);
-
+  
   useEffect(() => {
     const calcTotal = () => {
       const total = cart.reduce((prev,item) => {
@@ -18,6 +22,12 @@ function Cart() {
     calcTotal()
   }, [cart])
 
+  const addToCart = async () => {
+    await axios.patch('/user/addcart',{cart},{
+      headers: {Authorization: token}
+    })
+  }
+
   const increment = (product_id) => {
     cart.forEach(item => {
       if (item._id === product_id) {
@@ -25,15 +35,38 @@ function Cart() {
       }
     });
     setCart([...cart])
+    addToCart()
   }
 
   const decrement = (product_id) => {
     cart.forEach(item => {
       if (item._id === product_id) {
-        item.quantity -= 1
+        if(item.quantity > 1) item.quantity -= 1
+        
       }
     });
     setCart([...cart])
+    addToCart()
+  }
+
+  const removeItem = (product_id) => {
+    if(window.confirm("Are you sure to remove this item from your cart?")){
+      cart.forEach((item,index) => {
+        if(item._id === product_id){
+          cart.splice(index,1)
+        }
+      })
+      setCart([...cart])
+      addToCart()
+    }
+  }
+
+  const removeCart = () => {
+    if(window.confirm("Are you sure to remove your cart?")){
+      cart.splice(0,cart.length)
+      setCart([...cart])
+      addToCart()
+    }
   }
 
   if (cart.length === 0)
@@ -50,12 +83,13 @@ function Cart() {
             <th>Price</th>
             <th>Quantity</th>
             <th id="total">Total</th>
+            <th onClick={() => removeCart()}><img src={trash_can} alt="" className='trash-can'/></th>
           </tr>
           {cart.map((product) => {
             return (
               <tr>
                 <td>
-                  <img src={product.images.url} alt="" />
+                  <img src={product.images.url} alt="" className='img-item'/>
                 </td>
                 <td>{product.title}</td>
                 <td>{product.price}</td>
@@ -87,12 +121,13 @@ function Cart() {
                 </td>
 
                 <td>${product.quantity*product.price}</td>
+                <td onClick={() => removeItem(product._id)}><img src={trash_can} alt="" className='trash-can'/></td>
               </tr>
             );
           })}
       </table>
         <p className='total-price'>Total price: ${total}</p>
-        <Link to="/">
+        <Link to="/cart/payment">
           <input type="submit" value="Continue to checkout" class="checkout" />
         </Link>
     </div>

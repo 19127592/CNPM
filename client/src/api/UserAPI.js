@@ -6,6 +6,8 @@ export default function UserAPI(token) {
     const [Admin,isAdmin] = useState(false)
     const [Seller,isSeller] = useState(false)
     const [cart,setCart] = useState([])
+    const [infor,setInfor] = useState([])
+
     useEffect(()=> {
         console.log("Working")
         if(token){
@@ -19,6 +21,8 @@ export default function UserAPI(token) {
                     if(res.data.role === 2) isSeller(true)
                     
                     setCart(res.data.cart)
+                    setInfor(res.data)
+                    
                 } catch (err) {
                     alert(err.response.data.msg)
                 }
@@ -48,6 +52,7 @@ export default function UserAPI(token) {
         isAdmin: [Admin, isAdmin],
         isSeller: [Seller,isSeller],
         cart: [cart, setCart],
+        infor:[infor,setInfor],
         addToCart:addCart
     }
 }

@@ -1,4 +1,5 @@
 const Users = require('../models/userModel')
+const Order = require('../models/orderModel')
 const crypto = require('crypto')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
@@ -97,7 +98,23 @@ const userCtrl = {
             })
             return res.json({msg:"Added to cart"})
         } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    },
+    saveOrder: async(req,res) => {
+        try {
             
+            const {ship_fee,payment, delivery_time} = req.body
+            
+            const newOrder = new Order({
+                ship_fee,
+                payment,
+                delivery_time,
+                user_information: req.body.user_information
+            })
+            newOrder.save()
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
         }
     }
 }

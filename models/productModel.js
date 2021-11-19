@@ -3,8 +3,7 @@ const productSchema = new mongoose.Schema(
   {
     seller:{
       type: String,
-      required: true,
-      unique: true
+      default: "RookieSE",
     },
     product_id: {
       type: String,
