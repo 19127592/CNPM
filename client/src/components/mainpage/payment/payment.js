@@ -43,17 +43,13 @@ export default function Payment() {
         {
             setOrder({...order,["ship_fee"]:parseInt(shipFee)})
             setOrder({...order,["user_information"]:infor})
-            
-            
+            setOrder({...order,["progress"]:0})
+            console.log(order)
             await axios.post('/user/addOrder',{...order},{
                 headers: {Authorization: token}
             })
         }
 
-
-            
-
-        console.log(order)
     }
     
 
@@ -139,8 +135,9 @@ export default function Payment() {
                 <h3>Payment Information</h3>
                 <div className='user-payment-detail'>
                     <h4>Delivery Address</h4>
-                    <p className='name'>{infor.name}</p>
-                    
+                    <p>{infor.name}</p>
+                    <p>{infor.address}</p>
+                    <p>{infor.phone}</p>
                     <h4>Your cart</h4>
                     <span>{checkMulti()} </span>
                     <span className='cart-detail-dropdown'>Details</span>

@@ -112,8 +112,9 @@ const userCtrl = {
                 ship_fee,
                 payment,
                 delivery_time,
+                progress,
                 user_information: req.body.user_information,
-                progress
+                
             })
             newOrder.save()
         } catch (err) {

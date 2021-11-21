@@ -19,6 +19,10 @@ const orderSchema = new mongoose.Schema(
         require: true,
         default: "Noon"
     },
+    progress:{
+      type: Number,
+      default:0
+    },
     user_information:{
         type: Object,
         default:[],
