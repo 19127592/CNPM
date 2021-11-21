@@ -25,7 +25,6 @@ const orderSchema = new mongoose.Schema(
     },
     user_information:{
         type: Object,
-        default:[],
         require: true,
     }
   },

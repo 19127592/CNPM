@@ -7,7 +7,7 @@ export default function Payment() {
 
     const state = useContext(GlobalState);
     const [token] = state.token
-    const [infor] = state.userAPI.infor
+    const [infor,setInfor] = state.userAPI.infor
     const [cart, setCart] = state.userAPI.cart;
     const [total, setTotal] = useState(0);
 
@@ -16,42 +16,51 @@ export default function Payment() {
 
     const [payment,setPayment] = useState('');
     const [time,setTime] = useState('');
-
-
-    const [totalCash,setTotalCash] = useState(0);
-
-
-
     const [order,setOrder] = useState("")
 
+    const addToCart = async () => {
+        await axios.patch('/user/addcart',{cart},{
+          headers: {Authorization: token}
+        })
+    }
+    const removeCart = () => {
+        cart.splice(0,cart.length)
+        setCart([...cart])
+        addToCart()
+      }
+
     const addOrderDetail = (e) => {
-        const { name, value } = e.target;
+        var { name, value } = e.target;
+        if (name === 'delivery'){
+            name = 'ship_fee'
+            value = parseInt(value)
+            setShipFee(value)
+        }
         setOrder({ ...order, [name]: value });
     };
 
-    
 
-    const confirmOrder = async(e) => {
-        
-        setTotalCash(parseInt(shipFee) + total + total*10/100)
-        console.log(infor)
+    
+    const confirmOrder = () => {
+        const totalCash = parseInt(shipFee) + total + total*10/100
         const message = "Confirm your order\nPayment Method: " + order.payment
         const message1 = "\nDelivery Time: " + order.delivery_time
         const message2 = "\nTotal Money: " + totalCash
         /* Add address confirmation */
         if (window.confirm(message+message1+message2) === true)
         {
-            setOrder({...order,["ship_fee"]:parseInt(shipFee)})
-            setOrder({...order,["user_information"]:infor})
-            setOrder({...order,["progress"]:0})
-            console.log(order)
-            await axios.post('/user/addOrder',{...order},{
-                headers: {Authorization: token}
-            })
+            savedbOrder()
+            removeCart()
+            window.location.href = "/";
         }
 
     }
-    
+    const savedbOrder = async() => {
+        
+        await axios.post('/user/addOrder',{...order},{
+            headers: {Authorization: token}
+        })
+    }
 
 
     const checkMulti = () => {
@@ -67,7 +76,15 @@ export default function Payment() {
           },0)
           setTotal(total)
         }
+        const modifyOrder = () => {
+            infor.cart = cart
+            setOrder({
+                ...order, ["user_information"]: infor 
+            })
+            }
+        modifyOrder()
         calcTotal()
+        
       }, [cart])
     return (
         
@@ -80,13 +97,13 @@ export default function Payment() {
 
                             <label className='delivery'>
                                 Fast Delivery - $10
-                                <input type='radio' checked='check' name='delivery' value='10' onChange={e => setShipFee(e.target.value)}/>
+                                <input type='radio' checked='checked' name='delivery' value='10' onChange={addOrderDetail}/>
                                 <span class="checkmark"></span>
                             </label>
 
                             <label className='delivery'>
                                 Economical Delivery - $5
-                                <input type='radio' name='delivery'value='5'onChange={e => setShipFee(e.target.value)}/>
+                                <input type='radio' name='delivery'value='5'onChange={addOrderDetail}/>
                                 <span class="checkmark"></span>
                             </label>
 
@@ -128,7 +145,8 @@ export default function Payment() {
                     </div>
                 </div>
                 <div>
-                    <input type="submit" value="Order Now" className='order'onClick={e => confirmOrder(e)}/>
+                    <input type="submit" value="Order Now" className='order' onClick={confirmOrder}/>
+                    
                 </div>
             </div>
             <div className='user-payment'>
