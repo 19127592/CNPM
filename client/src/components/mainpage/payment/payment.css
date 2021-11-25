@@ -335,3 +335,8 @@ border-radius: 3px;
 cursor: pointer;
 font-size: 20px;
 }
+
+.cart-payment .submit-order{
+  display: flex;
+  justify-content: space-between;
+}

@@ -7,9 +7,13 @@ export default function UserAPI(token) {
     const [Seller,isSeller] = useState(false)
     const [cart,setCart] = useState([])
     const [infor,setInfor] = useState([])
+    const [users,setUsers] = useState([])
 
+    const getUsers = async () => {
+        const res = await axios.get('/user/users')
+        setUsers(res.data.users)
+    }
     useEffect(()=> {
-        console.log("Working")
         if(token){
             const getUser = async () => {
                 try {
@@ -17,8 +21,8 @@ export default function UserAPI(token) {
                         headers: {Authorization: token}
                     })
                     isLogged(true)
-                    if(res.data.role === 1) isAdmin(true)
-                    if(res.data.role === 2) isSeller(true)
+                    if(res.data.role === 1) {isAdmin(true)}
+                    else if(res.data.role === 2) {isSeller(true)}
                     
                     setCart(res.data.cart)
                     setInfor(res.data)
@@ -28,6 +32,8 @@ export default function UserAPI(token) {
                 }
             }
             getUser()
+            getUsers()
+            
         }
     },[token])
 
@@ -53,6 +59,7 @@ export default function UserAPI(token) {
         isSeller: [Seller,isSeller],
         cart: [cart, setCart],
         infor:[infor,setInfor],
+        users:[users,setUsers],
         addToCart:addCart
     }
 }
