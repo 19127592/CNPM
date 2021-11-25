@@ -3,6 +3,7 @@ import { GlobalState } from "../../GlobalState";
 import Menu from "./menu.svg";
 import Close from "./close.svg";
 import Cart from "./cart.svg";
+import User from "./user.svg";
 import { Link } from "react-router-dom";
 import axios from "axios";
 export default function Header() {
@@ -22,9 +23,27 @@ export default function Header() {
     return (
       <>
         <li>
-          <Link to="/" onClick={logOut}>
-            Logout
-          </Link>
+          <div className="usericon">
+            <div className="icon">
+              <img src={User} alt="" width="30" />
+            </div>
+            <div className="dropdown-menu">
+              <li>
+                <Link to="/">
+                  {isAdmin
+                    ? adminControl()
+                    : isSeller
+                    ? sellerControl()
+                    : "Product"}
+                </Link>
+              </li>
+              <li>
+                <Link to="/" onClick={logOut}>
+                  Logout
+                </Link>
+              </li>
+            </div>
+          </div>
         </li>
       </>
     );
@@ -73,12 +92,13 @@ export default function Header() {
           <input type="submit" name="" value="Search" className="search-btn" />
         </form>
       </div>
-      <ul>
-        <li>
-          <Link to="/">
-            {isAdmin ? adminControl() : isSeller ? sellerControl() : "Product"}
-          </Link>
-        </li>
+      <div className="cart-icon">
+        <span>{cart.length}</span>
+        <Link to="/cart">
+          <img src={Cart} alt="" width="30" />
+        </Link>
+      </div>
+      <ul>		  
         {isLogged ? (
           loggedControl()
         ) : (
@@ -90,12 +110,6 @@ export default function Header() {
           <img src={Close} alt="" width="30" className="menu" />
         </li>
       </ul>
-      <div className="cart-icon">
-        <span>{cart.length}</span>
-        <Link to="/cart">
-          <img src={Cart} alt="" width="30" />
-        </Link>
-      </div>
     </header>
   );
 }
