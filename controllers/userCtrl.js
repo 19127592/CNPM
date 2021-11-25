@@ -4,7 +4,28 @@ const crypto = require('crypto')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 var check = false
+class APIfeatures {
+    constructor(query, query_string) {
+        this.query = query
+        this.query_string = query_string
+    }
+}
 const userCtrl = {
+    getUsers: async(req,res) => {
+        try {
+            console.log("Working")
+            const features = new APIfeatures(Users.find(), req.query)
+
+            const users = await features.query
+            res.json({
+                status: 'success',
+                result: users.length,
+                users: users
+            })
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    },
     register: async(req, res) => {
         try {
             const { name, email, password, address, phone } = req.body;
@@ -87,6 +108,46 @@ const userCtrl = {
             const user = await Users.findById(req.user.id).select('-password')
             if (!user) return res.status(400).json({ msg: "User does not exist." })
             res.json(user)
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    },
+    updateRole: async(req,res) => {
+        try {
+            const userRole = req.body.user
+            const sellerRole = req.body.seller
+            
+            
+            for (const user of userRole){
+                const getUser = await Users.findById(user)
+                if(!getUser) return res.status(400).json({msg:"User does not exist"})
+                await Users.findOneAndUpdate({_id: user},{
+                    role: 0
+                })
+            }
+            
+            for (const user of sellerRole){
+                const getUser = await Users.findById(user)
+                if(!getUser) return res.status(400).json({msg:"User does not exist"})
+                await Users.findOneAndUpdate({_id: user},{
+                    role: 2
+                })
+            }
+            
+            
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+            
+        }
+    },
+    removeAccounts: async(req,res) => {
+        try {
+            const accounts = req.body.deleteUser
+            for(const acc of accounts){
+                await Users.deleteOne({_id:acc._id})
+            }
+            //Users.deleteOne(req.body)
+            return res.json({msg:"Added to cart"})
         } catch (err) {
             return res.status(500).json({ msg: err.message })
         }

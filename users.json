@@ -1,0 +1,241 @@
+[{
+  "_id": {
+    "$oid": "6197d5273447583176d9ac88"
+  },
+  "name": "Nguyễn Huy Anh Thư",
+  "email": "nghanhthu0111@gmail.com",
+  "password": "2495412a6bea3567605cb5640bcabd09",
+  "role": 2,
+  "cart": [
+    {
+      "seller": "RookieSE",
+      "_id": "6170545f3c4bae38d1c6187a",
+      "product_id": "01",
+      "title": "rog zephyrus g14 ga401qh hz035t",
+      "price": 1200,
+      "description": "Laptop gaming",
+      "content": "content",
+      "images": {
+        "public_id": "Laptop/1",
+        "url": "https://res.cloudinary.com/triss/image/upload/v1634029180/Ecommerce-Website/Laptop/ROG_Zephyrus_G14_t3niua.png"
+      },
+      "category": "laptop",
+      "checked": false,
+      "sold": 0,
+      "createdAt": "2021-10-20T17:39:43.676Z",
+      "updatedAt": "2021-10-20T17:39:43.676Z",
+      "__v": 0,
+      "brand": "Asus",
+      "quantity": 1
+    },
+    {
+      "seller": "RookieSE",
+      "_id": "617054d83c4bae38d1c6187d",
+      "product_id": "02",
+      "title": "msi modern b11mo 682vn",
+      "price": 1100,
+      "description": "Laptop gaming",
+      "content": "content",
+      "images": {
+        "public_id": "Laptop/2",
+        "url": "https://res.cloudinary.com/triss/image/upload/v1634028067/Ecommerce-Website/Laptop/MSI_Modern14_imqnf2.jpg"
+      },
+      "category": "laptop",
+      "checked": false,
+      "sold": 0,
+      "createdAt": "2021-10-20T17:41:44.006Z",
+      "updatedAt": "2021-10-20T17:41:44.006Z",
+      "__v": 0,
+      "brand": "MSI",
+      "quantity": 1
+    }
+  ],
+  "address": "73A Gò Dầu, phường Tân Quý, quận Tân Phú, thành phố Hồ Chí Minh",
+  "phone": "0938374163",
+  "createdAt": {
+    "$date": "2021-11-19T16:47:35.747Z"
+  },
+  "updatedAt": {
+    "$date": "2021-11-22T18:39:47.375Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6197d7dfe668d4e1947b974f"
+  },
+  "name": "Phan Tường Duy",
+  "email": "duybalu2809@gmail.com",
+  "password": "60d498210a7a9fd2c8876422333f98da",
+  "role": 0,
+  "cart": [],
+  "address": "40/40 Nguyễn Giản Thanh, Phường 15, Quận 10, TP.HCM",
+  "phone": "0868059405",
+  "createdAt": {
+    "$date": "2021-11-19T16:59:11.776Z"
+  },
+  "updatedAt": {
+    "$date": "2021-11-22T18:39:45.850Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6197d8fac7847f79e269abae"
+  },
+  "name": "Nguyễn Phú Quí",
+  "email": "quynt.1406@gmail.com",
+  "password": "6db53632ed46452ce524b1bc7a903f67",
+  "role": 0,
+  "cart": [
+    {
+      "seller": "RookieSE",
+      "_id": "6176ce8eb575cf184e4d1946",
+      "product_id": "111",
+      "title": "iphone 12 pro max 128gb grey",
+      "price": 1500,
+      "description": "iOS",
+      "content": "content",
+      "images": {
+        "public_id": "Phone/111",
+        "url": "https://res.cloudinary.com/triss/image/upload/v1635175163/Ecommerce-Website/Phone/iphone-12-pro-max-512gb-xam-1-org_chkyxn.jpg"
+      },
+      "category": "mobile phone",
+      "checked": false,
+      "sold": 0,
+      "createdAt": "2021-10-25T15:34:38.136Z",
+      "updatedAt": "2021-10-25T15:34:38.136Z",
+      "__v": 0,
+      "brand": "Apple",
+      "quantity": 1
+    },
+    {
+      "seller": "RookieSE",
+      "_id": "6176cc3fdc5c8e34b5495672",
+      "product_id": "103",
+      "title": "samsung  galaxy z flip3 5g 256gb black ",
+      "price": 2000,
+      "description": "Android OS",
+      "content": "content",
+      "images": {
+        "public_id": "Phone/103",
+        "url": "https://res.cloudinary.com/triss/image/upload/v1635173716/Ecommerce-Website/Phone/Samsung_Galaxy_Z_Flip3_5G_256GB_Black_qohcoe.jpg"
+      },
+      "category": "mobile phone",
+      "checked": false,
+      "sold": 0,
+      "createdAt": "2021-10-25T15:24:47.864Z",
+      "updatedAt": "2021-10-25T15:24:47.864Z",
+      "__v": 0,
+      "brand": "Samsung",
+      "quantity": 1
+    },
+    {
+      "seller": "RookieSE",
+      "_id": "6170548f507b24bdbd8b6d3c",
+      "product_id": "07",
+      "title": "macbook pro 2020 grey",
+      "price": 2000,
+      "description": "Laptop doanh nhân",
+      "content": "content",
+      "images": {
+        "public_id": "Laptop/7",
+        "url": "https://res.cloudinary.com/triss/image/upload/v1634027168/Ecommerce-Website/Laptop/Macbook_Pro_2020_Grey_ylu50r.jpg"
+      },
+      "category": "laptop",
+      "checked": false,
+      "sold": 0,
+      "createdAt": "2021-10-20T17:40:31.175Z",
+      "updatedAt": "2021-10-20T17:40:31.175Z",
+      "__v": 0,
+      "brand": "Apple",
+      "quantity": 1
+    }
+  ],
+  "address": "75, khu phố 2, đường CMT8, thị trấn Dầu Tiếng, huyện Dầu Tiếng, tỉnh Bình Dương",
+  "phone": "0971930839",
+  "createdAt": {
+    "$date": "2021-11-19T17:03:54.121Z"
+  },
+  "updatedAt": {
+    "$date": "2021-11-22T18:39:46.622Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "619a0b5ddf681c512dc1adf5"
+  },
+  "name": "Lê Minh Trí",
+  "email": "letri1483@gmail.com",
+  "password": "410b752a46b47b748820d0f59c67d777",
+  "role": 2,
+  "cart": [],
+  "address": "79 Nguyễn Thái Bình, P3 Tân An Long An",
+  "phone": "0888744476",
+  "createdAt": {
+    "$date": "2021-11-21T09:03:25.374Z"
+  },
+  "updatedAt": {
+    "$date": "2021-11-22T18:39:48.410Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "619a7e6e65e29d3c4841ac70"
+  },
+  "name": "Admin 01",
+  "email": "admin01@gmail.com",
+  "password": "2637a5c30af69a7bad877fdb65fbd78b",
+  "role": 1,
+  "cart": [
+    {
+      "seller": "RookieSE",
+      "_id": "6170545f3c4bae38d1c6187a",
+      "product_id": "01",
+      "title": "rog zephyrus g14 ga401qh hz035t",
+      "price": 1200,
+      "description": "Laptop gaming",
+      "content": "content",
+      "images": {
+        "public_id": "Laptop/1",
+        "url": "https://res.cloudinary.com/triss/image/upload/v1634029180/Ecommerce-Website/Laptop/ROG_Zephyrus_G14_t3niua.png"
+      },
+      "category": "laptop",
+      "checked": false,
+      "sold": 0,
+      "createdAt": "2021-10-20T17:39:43.676Z",
+      "updatedAt": "2021-10-20T17:39:43.676Z",
+      "__v": 0,
+      "brand": "Asus",
+      "quantity": 3
+    },
+    {
+      "seller": "RookieSE",
+      "_id": "6170548f507b24bdbd8b6d3c",
+      "product_id": "07",
+      "title": "macbook pro 2020 grey",
+      "price": 2000,
+      "description": "Laptop doanh nhân",
+      "content": "content",
+      "images": {
+        "public_id": "Laptop/7",
+        "url": "https://res.cloudinary.com/triss/image/upload/v1634027168/Ecommerce-Website/Laptop/Macbook_Pro_2020_Grey_ylu50r.jpg"
+      },
+      "category": "laptop",
+      "checked": false,
+      "sold": 0,
+      "createdAt": "2021-10-20T17:40:31.175Z",
+      "updatedAt": "2021-10-20T17:40:31.175Z",
+      "__v": 0,
+      "brand": "Apple",
+      "quantity": 2
+    }
+  ],
+  "address": "79 Nguyễn Thái Bình P3 Tân An Long An",
+  "phone": "0888744476",
+  "createdAt": {
+    "$date": "2021-11-21T17:14:22.631Z"
+  },
+  "updatedAt": {
+    "$date": "2021-11-22T18:10:23.367Z"
+  },
+  "__v": 0
+}]

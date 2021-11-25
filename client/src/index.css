@@ -50,3 +50,9 @@ button{
 @import url("./components/mainpage/cart/cart.css");
 
 @import url("./components/mainpage/payment/payment.css");
+
+@import url("./components/mainpage/DataManagment/UserManagement.css");
+
+@import url("./components/mainpage/DataManagment/EditProduct.css");
+
+@import url("./components/mainpage/DataManagment/CreateProduct.css");

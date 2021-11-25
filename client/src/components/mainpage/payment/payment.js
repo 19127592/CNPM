@@ -2,7 +2,7 @@ import React,{useContext,useState, useEffect} from 'react'
 import axios from 'axios'
 import { GlobalState } from "../../../GlobalState";
 import { render } from 'react-dom';
-
+import PaypalButton from './PaypalButton'
 export default function Payment() {
 
     const state = useContext(GlobalState);
@@ -14,7 +14,7 @@ export default function Payment() {
     
     const [shipFee,setShipFee] = useState(0);
 
-    const [payment,setPayment] = useState('');
+    const [payment,setPayment] = useState(false);
     const [time,setTime] = useState('');
     const [order,setOrder] = useState("")
 
@@ -46,28 +46,38 @@ export default function Payment() {
         const message = "Confirm your order\nPayment Method: " + order.payment
         const message1 = "\nDelivery Time: " + order.delivery_time
         const message2 = "\nTotal Money: " + totalCash
+        
         /* Add address confirmation */
         if (window.confirm(message+message1+message2) === true)
         {
-            savedbOrder()
-            removeCart()
-            window.location.href = "/";
+            if (order.payment === 'Paypal'){
+                setPayment(true)
+                window.alert("Please press the Paypal button below to complete your purchase")
+            }else{
+                setPayment(false)
+                savedbOrder()
+                removeCart()
+                window.location.href = "/";
+            }
+            
         }
-
     }
     const savedbOrder = async() => {
-        
+        console.log(payment)
         await axios.post('/user/addOrder',{...order},{
             headers: {Authorization: token}
         })
     }
-
 
     const checkMulti = () => {
         if (cart.length > 1){
             return cart.length+" products"
         }else return cart.length+" product"
     };
+    const tranSucess = async(payment) => {
+        savedbOrder()
+        removeCart()
+    }
     useEffect(() => {
         
         const calcTotal = () => {
@@ -85,7 +95,7 @@ export default function Payment() {
         modifyOrder()
         calcTotal()
         
-      }, [cart])
+      }, [cart,payment])
     return (
         
         <div className='checkout-payment'>
@@ -144,9 +154,10 @@ export default function Payment() {
                         </label>
                     </div>
                 </div>
-                <div>
-                    <input type="submit" value="Order Now" className='order' onClick={confirmOrder}/>
+                <div className='submit-order'>
                     
+                    <input type="submit" value="Order Now" className='order' onClick={confirmOrder}/>
+                    <span>{payment ? <PaypalButton total={parseInt(shipFee) + total + total*10/100} tranSucess={tranSucess}/>:""}</span>
                 </div>
             </div>
             <div className='user-payment'>

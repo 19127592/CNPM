@@ -34,7 +34,7 @@ export default function Header() {
     return (
       <>
         <li>
-          <Link to="/update">Product Management</Link>
+          <Link to="/product-management">Product Management</Link>
         </li>
       </>
     );
@@ -45,7 +45,7 @@ export default function Header() {
     return (
       <>
         <li>
-          <Link to="/user_management">Data management</Link>
+          <Link to="/user-management">Data management</Link>
         </li>
       </>
     );

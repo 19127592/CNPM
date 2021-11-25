@@ -9,5 +9,7 @@ router.get('/refresh_token', userCtrl.refreshToken)
 router.get('/infor', auth, userCtrl.getUser)
 router.patch('/addCart',auth,userCtrl.addCart)
 router.post('/addOrder',auth,userCtrl.saveOrder)
-
+router.get('/users',userCtrl.getUsers)
+router.patch('/update-role',auth,userCtrl.updateRole)
+router.post('/remove-accounts',auth,userCtrl.removeAccounts)
 module.exports = router

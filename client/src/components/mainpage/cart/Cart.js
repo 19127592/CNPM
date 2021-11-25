@@ -4,7 +4,6 @@ import { useParams, Link } from "react-router-dom";
 import ReactDOM from "react-dom";
 import trash_can from './iconmonstr-trash-can-1.svg'
 import axios from 'axios'
-import Paypal from './paypal'
 
 function Cart() {
   const state = useContext(GlobalState);
