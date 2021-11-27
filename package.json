@@ -23,6 +23,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.10",
     "mongoose-beautiful-unique-validation": "^7.1.1",
+    "react-contenteditable": "^3.3.6",
     "react-native": "^0.66.2",
     "react-native-counters": "^1.2.0",
     "react-paypal-express-checkout": "^1.0.5",

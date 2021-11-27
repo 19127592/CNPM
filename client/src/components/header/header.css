@@ -16,7 +16,7 @@ header a {
 header ul li {
   display: inline-block;
   opacity: 0.7;
-  padding: 10px 20px;
+  padding: 10px 15px;
 }
 header ul li:hover {
   opacity: 1;
@@ -42,7 +42,7 @@ header ul li:hover {
   min-width: 150px;
   max-width: 500px;
   overflow: auto;
-  position: absolute;
+  position: relative;
 }
 
 input {
@@ -88,7 +88,7 @@ input {
 .usericon {
   position: relative;
   display: inline-block;
-  float: right;
+  top: 5px;
 }
 
 .usericon:hover .dropdown-menu {

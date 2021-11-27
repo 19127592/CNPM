@@ -19,6 +19,8 @@ export default function Header() {
     window.location.href = "/";
   };
 
+  const [infor, setInfor] = state.userAPI.infor;
+
   const loggedControl = () => {
     return (
       <>
@@ -26,15 +28,16 @@ export default function Header() {
           <div className="usericon">
             <div className="icon">
               <img src={User} alt="" width="30" />
+              <p>{infor.name}</p>
             </div>
             <div className="dropdown-menu">
               <li>
                 <Link to="/">
                   {isAdmin
-                    ? adminControl()
+                    ? adminControl2()
                     : isSeller
-                    ? sellerControl()
-                    : "Product"}
+                    ? sellerControl2()
+                    : userControl()}
                 </Link>
               </li>
               <li>
@@ -49,11 +52,34 @@ export default function Header() {
     );
   };
 
+  const userControl = () => {
+    return (
+      <>
+        <li>
+          <Link to="/">Your order</Link>
+        </li>
+        <li>
+          <Link to="/">Oder history</Link>
+        </li>
+      </>
+    );
+  };
+
+  const sellerControl2 = () => {
+    return (
+      <>
+        <li>
+          <Link to="/product-management">Data management</Link>
+        </li>
+      </>
+    );
+  };
+
   const sellerControl = () => {
     return (
       <>
         <li>
-          <Link to="/product-management">Product Management</Link>
+          <Link to="/product-management">Your shop</Link>
         </li>
       </>
     );
@@ -70,6 +96,19 @@ export default function Header() {
     );
   };
 
+  const adminControl2 = () => {
+    return (
+      <>
+        <li>
+          <Link to="/user-management">User Management</Link>
+        </li>
+        <li>
+          <Link to="/product-management">Product Management</Link>
+        </li>
+      </>
+    );
+  };
+
   return (
     //FE (Thu)
     <header>
@@ -78,7 +117,9 @@ export default function Header() {
       </div>
       <div className="logo">
         <h1>
-          <Link to="/">{isAdmin ? "Admin" : "rookieSE"}</Link>
+          <Link to="/">
+            {isAdmin ? "Admin" : isSeller ? "Seller" : "rookieSE"}
+          </Link>
         </h1>
       </div>
       <div class="search-box">
@@ -92,13 +133,12 @@ export default function Header() {
           <input type="submit" name="" value="Search" className="search-btn" />
         </form>
       </div>
-      <div className="cart-icon">
-        <span>{cart.length}</span>
-        <Link to="/cart">
-          <img src={Cart} alt="" width="30" />
-        </Link>
-      </div>
-      <ul>		  
+      <ul>
+        <li>
+          <Link to="/">
+            {isAdmin ? adminControl() : isSeller ? sellerControl() : "Product"}
+          </Link>
+        </li>
         {isLogged ? (
           loggedControl()
         ) : (
@@ -108,11 +148,15 @@ export default function Header() {
         )}
         <li>
           <img src={Close} alt="" width="30" className="menu" />
+          <div className="cart-icon">
+            <span>{cart.length}</span>
+            <Link to="/cart">
+              <img src={Cart} alt="" width="30" />
+            </Link>
+          </div>
         </li>
       </ul>
     </header>
   );
 }
-
-/*lam icon account, khong xoa log out*/
-/**/
+/*Trong drop down của user có your cart, your order (aka order history)*/
