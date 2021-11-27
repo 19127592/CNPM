@@ -2,59 +2,70 @@ const Products = require('../models/productModel')
 
 //Filter, sorting and paginating
 class APIfeatures {
-    constructor(query, query_string) {
-        this.query = query
-        this.query_string = query_string
+    constructor(query, queryString){
+        this.query = query;
+        this.queryString = queryString;
     }
-    filter() {
-        const obj_query = {...this.query_string }
+    filtering(){
+       const queryObj = {...this.queryString} //queryString = req.query
 
-        const filterBy = ['page', 'sort', 'limit']
-        filterBy.forEach(element => delete(obj_query[element]))
+       const excludedFields = ['page', 'sort', 'limit']
+       excludedFields.forEach(el => delete(queryObj[el]))
+       
+       let queryStr = JSON.stringify(queryObj)
+       queryStr = queryStr.replace(/\b(gte|gt|lt|lte|regex)\b/g, match => '$' + match)
 
-        let str_query = JSON.stringify(obj_query)
-        str_query = str_query.replace(/\b(gte|gt|lt|lte|regex)\b/g, match => '$' + match)
-
-        this.query.find(JSON.parse(str_query))
-        return this
+    //    gte = greater than or equal
+    //    lte = lesser than or equal
+    //    lt = lesser than
+    //    gt = greater than
+       this.query.find(JSON.parse(queryStr))
+         
+       return this;
     }
-    sort() {
-        if (this.query_string.sort) {
-            const sortBy = this.query_string.sort.split(',').join(' ')
-            console.log(sortBy)
+
+    sorting(){
+        if(this.queryString.sort){
+            const sortBy = this.queryString.sort.split(',').join(' ')
             this.query = this.query.sort(sortBy)
-        } else {
-            this.query = this.query.sort('createdAt')
+        }else{
+            this.query = this.query.sort('-createdAt')
         }
-        return this
+
+        return this;
     }
-    paging() {
-        const page = this.query_string.page * 1 || 1
-        const limit = this.query_string.limit * 1 || 30 ///Limit product in one page
-        const skip = (page - 1) * limit
+
+    paginating(){
+        const page = this.queryString.page * 1 || 1
+        const limit = this.queryString.limit * 1 || 9
+        const skip = (page - 1) * limit;
         this.query = this.query.skip(skip).limit(limit)
-        return this
+        return this;
     }
 }
 
+
 const productCtrl = {
-    getProducts: async(req, res) => {
+    getProducts: async(req, res) =>{
         try {
-            const features = new APIfeatures(Products.find(), req.query).filter().sort().paging()
+            const features = new APIfeatures(Products.find(), req.query)
+            .filtering().sorting().paginating()
 
             const products = await features.query
+
             res.json({
                 status: 'success',
                 result: products.length,
                 products: products
             })
+            
         } catch (err) {
-            return res.status(400).json({ msg: err.message })
+            return res.status(500).json({msg: err.message})
         }
     },
     createProduct: async(req, res) => {
         try {
-            const { product_id, title, price, description, content, images, category, brand } = req.body
+            const { product_id, title, price, description, content, images, category, brand,seller } = req.body
             if (!images) return res.status(400).json({ msg: "No image upload" })
             const product = await Products.findOne({ product_id })
             if (product)
@@ -67,7 +78,8 @@ const productCtrl = {
                 content,
                 images,
                 category,
-                brand
+                brand,
+                seller
             })
             console.log("Create a product")
             await newProduct.save()
@@ -89,7 +101,7 @@ const productCtrl = {
             const { title, price, description, content, images, category, brand } = req.body
             if (!images) return res.status(400).json({ msg: "No images uploaded" })
             await Products.findOneAndUpdate({ _id: req.params.id }, {
-                title: title.toLowerCase(),
+                title: title,
                 price,
                 description,
                 content,

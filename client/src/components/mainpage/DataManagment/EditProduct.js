@@ -10,6 +10,7 @@ export default function ProductDetail() {
     const [ProductDetail,setProductDetail] = useState([])
     const [EditProductDetail,setEditProductDetail] = useState([])
     const [value,setValue] = useState([])
+    
     const text = useRef(["I am editable"]);
     const name = useRef('')
     console.log(text.current)

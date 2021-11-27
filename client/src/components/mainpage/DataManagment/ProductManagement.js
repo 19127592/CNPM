@@ -1,13 +1,75 @@
-import React,{useContext} from 'react'
+import React,{useContext,useEffect,useState} from 'react'
 import {GlobalState} from '../../../GlobalState'
 import trash_can from './iconmonstr-trash-can-1.svg'
 import { useParams, Link } from "react-router-dom";
 import edit_icon from './Edit_icon.svg'
 import plus_icon from './plus-flat.svg'
-
+import axios from 'axios'
 export default function ProductManagment() {
+    
     const state = useContext(GlobalState)
-    const [products] = state.productsAPI.products
+    const [token] = state.token
+    const [products,setProducts] = state.productsAPI.products
+    const [infor,setInfor] = state.userAPI.infor
+    const [isAdmin] = state.userAPI.isAdmin
+
+    const getName = () => {
+      if(isAdmin){
+        return "RookieSE"
+      }else return infor.name
+    }
+    const name = getName()
+    console.log(name)
+    const getProducts = () =>{
+      var name = ""
+      if(isAdmin){
+        name = "RookieSE"
+      }else name = infor.name
+      products.forEach((item,index) => {
+        if(item.seller === name){
+          products.splice(index,1)
+        }
+      })
+      
+      setProducts([...products])
+    }
+    
+    
+    const removeProduct = async(product_id) => {
+      if(window.confirm("Are you sure to remove this product from your shop?")){
+        products.forEach((item,index) => {
+          if(item._id === product_id){
+            products.splice(index,1)
+          }
+        })
+        await axios.delete(`/api/products/${product_id}`,{
+          headers: {Authorization: token}
+        })
+        setProducts([...products])
+      }
+
+    }
+    const deleteDb = async(product_id) =>{
+      await axios.delete(`/api/products/${product_id}`,{
+        headers: {Authorization: token}
+      })
+    }
+    const removeAllProduct = () => {
+      if(window.confirm("Are you sure to remove all of your products?")){
+        products.forEach((item,index) => {
+          if(item.seller === name){
+            products.splice(index,1)
+            deleteDb(item._id)
+          }
+      })
+        
+        setProducts([...products])
+      }
+      
+    }
+    useEffect(() => {
+      
+    },[products])
     return (
         <div>
           <div className='product-mod'>
@@ -35,10 +97,11 @@ export default function ProductManagment() {
             <th>Description</th>
             <th>Price($)</th>
             <th><img src={edit_icon} alt="" className='trash-can'/></th>
-            <th><img src={trash_can} alt="" className='trash-can'/></th>
+            <th onClick={() => removeAllProduct()}><img src={trash_can} alt="" className='trash-can'/></th>
           </tr>
           {products.map((product) => {
-            return (
+            if(product.seller === name){
+              return (
                 <tr className='product-edit'>
                 <td>
                   <Link to={'/detail/'+product._id}>
@@ -59,11 +122,11 @@ export default function ProductManagment() {
                     <img src={edit_icon} alt="" className='trash-can'/>
                   </Link>
                   </td>
-                <td className='check-box'>
-                  <input type='checkbox'></input>
-                </td>
+                  <td onClick={() => removeProduct(product._id)}><img src={trash_can} alt="" className='trash-can'/></td>
               </tr>
-            )})};
+            )
+            }
+            })}
             </table>
         </div>
     )
