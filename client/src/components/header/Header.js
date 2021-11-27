@@ -12,7 +12,7 @@ export default function Header() {
   const [isAdmin] = state.userAPI.isAdmin;
   const [isSeller] = state.userAPI.isSeller;
   const [cart] = state.userAPI.cart;
-
+  const [search, setSearch] = state.productsAPI.search
   const logOut = async () => {
     await axios.get("/user/logout");
     localStorage.clear();
@@ -95,6 +95,7 @@ export default function Header() {
       </>
     );
   };
+<<<<<<< HEAD
 
   const adminControl2 = () => {
     return (
@@ -109,6 +110,11 @@ export default function Header() {
     );
   };
 
+=======
+  const Search = (e) => {
+    
+  }
+>>>>>>> 2e098ca6f5844490e1deab7117360366c14725db
   return (
     //FE (Thu)
     <header>
@@ -123,14 +129,16 @@ export default function Header() {
         </h1>
       </div>
       <div class="search-box">
-        <form>
+        <form onSubmit={Search}>
           <input
             type="text"
             name=""
             placeholder="Search..."
             className="search-field"
+            value={search}
+            onChange={e => setSearch(e.target.value.toLowerCase())}
           />
-          <input type="submit" name="" value="Search" className="search-btn" />
+          <input type="submit" name="" className="search-btn" />
         </form>
       </div>
       <ul>

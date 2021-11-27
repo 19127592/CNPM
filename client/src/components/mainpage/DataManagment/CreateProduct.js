@@ -4,14 +4,16 @@ import {GlobalState} from '../../../GlobalState'
 import Loading from '../other/loading/Loading'
 import {useHistory, useParams} from 'react-router-dom'
 
-const initialState = {
+var initialState = {
     product_id: '',
     title: '',
     price: 0,
+    brand:'',
     description: '',
     content: '',
-    category: '',
-    _id: ''
+    category: 'laptop',
+    _id: '',
+    seller:'',
 }
 
 function CreateProduct() {
@@ -28,10 +30,17 @@ function CreateProduct() {
     const [isAdmin] = state.userAPI.isAdmin
     const [isSeller] = state.userAPI.isSeller
     const [token] = state.token
-
+    const [infor,setInfor] = state.userAPI.infor
     const [products] = state.productsAPI.products
     const [onEdit, setOnEdit] = useState(false)
     const [callback, setCallback] = state.productsAPI.callback
+    
+    const getName = () => {
+        if(isAdmin){
+          return "RookieSE"
+        }else return infor.name
+      }
+    const name = getName()
 
     useEffect(() => {
         if(param.id){
@@ -44,10 +53,11 @@ function CreateProduct() {
             })
         }else{
             setOnEdit(false)
-            setProduct(initialState)
+            initialState['seller'] = name
+            setProduct(initialState)  
             setImages(false)
         }
-        console.log(isSeller)
+        
     }, [param.id, products])
 
     const handleUpload = async e =>{
@@ -100,14 +110,17 @@ function CreateProduct() {
     const handleChangeInput = e =>{
         const {name, value} = e.target
         setProduct({...product, [name]:value})
+        
     }
 
     const handleSubmit = async e =>{
         e.preventDefault()
         try {
+            
             if(!isAdmin){
                 if(!isSeller) return alert("You're not an admin or seller")
-            } 
+            }
+            
             if(!images) return alert("No Image Upload")
 
             if(onEdit){
@@ -119,6 +132,7 @@ function CreateProduct() {
                     headers: {Authorization: token}
                 })
             }
+
             setCallback(!callback)
             history.push("/")
         } catch (err) {
@@ -152,9 +166,14 @@ function CreateProduct() {
                 </div>
 
                 <div className="row">
-                    <label htmlFor="title">Title</label>
+                    <label htmlFor="title">Name</label>
                     <input type="text" name="title" id="title" required
                     value={product.title} onChange={handleChangeInput} />
+                </div>
+                <div className="row">
+                    <label htmlFor="brand">Brand</label>
+                    <input type="text" name="brand" id="brand" required
+                    value={product.brand} onChange={handleChangeInput} />
                 </div>
 
                 <div className="row">
@@ -162,7 +181,15 @@ function CreateProduct() {
                     <input type="number" name="price" id="price" required
                     value={product.price} onChange={handleChangeInput} />
                 </div>
-
+                <div className="row">
+                    <label htmlFor="category">Category</label>
+                <select class='role' name='category' onChange={handleChangeInput}>
+                  <option label = 'Laptop' value="laptop">Laptop</option>
+                  <option label = 'Mobile phone' value="mobile phone">Phone</option>
+                  <option label = 'Other' value="other">Other</option>
+                </select>
+                    
+                </div>
                 <div className="row">
                     <label htmlFor="description">Description</label>
                     <textarea type="text" name="description" id="description" required

@@ -18,10 +18,11 @@ export default function Pages() {
     const [isLogged] = state.userAPI.isLogged
     /* 5:0:0 */
     return (
+        
         <Switch>
             <Route path='/' exact component={Products}/>
             <Route path='/detail/:id' exact component={ProductDetail}/>
-            <Route path='/edit/:id' exact component={EditProduct}/>
+            <Route path='/edit/:id' exact component={CreateProduct}/>
             <Route path='/login' exact component={Login}/>
             <Route path='/register' exact component={Register}/>
             

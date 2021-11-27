@@ -3,7 +3,7 @@ const productSchema = new mongoose.Schema(
   {
     seller:{
       type: String,
-      default: "RookieSE",
+      require: true,
     },
     product_id: {
       type: String,
