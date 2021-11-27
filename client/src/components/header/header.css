@@ -1,7 +1,6 @@
 header {
   min-height: 70px;
   width: 100%;
-  overflow: hidden;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -43,6 +42,7 @@ header ul li:hover {
   min-width: 150px;
   max-width: 500px;
   overflow: auto;
+  position: absolute;
 }
 
 input {
@@ -55,7 +55,7 @@ input {
 .search-field {
   width: 350px;
   height: 35px;
-  border: none;
+  border: 1px solid rgb(136, 135, 135);
   outline: none;
   padding: 0 25px;
   border-radius: 25px 0 0 25px;
@@ -74,4 +74,29 @@ input {
 
 .search-btn:hover {
   background: #838181;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 158px;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.usericon {
+  position: relative;
+  display: inline-block;
+  float: right;
+}
+
+.usericon:hover .dropdown-menu {
+  display: block;
+}
+
+.menu-button {
+  font-size: 15px;
+  cursor: pointer;
+  color: rgb(0, 0, 0);
 }
