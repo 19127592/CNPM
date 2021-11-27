@@ -12,7 +12,7 @@ export default function Header() {
   const [isAdmin] = state.userAPI.isAdmin;
   const [isSeller] = state.userAPI.isSeller;
   const [cart] = state.userAPI.cart;
-  const [search, setSearch] = state.productsAPI.search
+  const [search, setSearch] = state.productsAPI.search;
   const logOut = async () => {
     await axios.get("/user/logout");
     localStorage.clear();
@@ -69,7 +69,7 @@ export default function Header() {
     return (
       <>
         <li>
-          <Link to="/product-management">Data management</Link>
+          <Link to="/product-management">Shop management</Link>
         </li>
       </>
     );
@@ -95,7 +95,6 @@ export default function Header() {
       </>
     );
   };
-<<<<<<< HEAD
 
   const adminControl2 = () => {
     return (
@@ -110,11 +109,8 @@ export default function Header() {
     );
   };
 
-=======
-  const Search = (e) => {
-    
-  }
->>>>>>> 2e098ca6f5844490e1deab7117360366c14725db
+  const Search = (e) => {};
+
   return (
     //FE (Thu)
     <header>
@@ -136,7 +132,7 @@ export default function Header() {
             placeholder="Search..."
             className="search-field"
             value={search}
-            onChange={e => setSearch(e.target.value.toLowerCase())}
+            onChange={(e) => setSearch(e.target.value.toLowerCase())}
           />
           <input type="submit" name="" className="search-btn" />
         </form>
@@ -167,4 +163,3 @@ export default function Header() {
     </header>
   );
 }
-/*Trong drop down của user có your cart, your order (aka order history)*/

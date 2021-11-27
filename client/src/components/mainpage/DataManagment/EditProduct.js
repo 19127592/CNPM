@@ -4,34 +4,16 @@ import { GlobalState } from "../../../GlobalState";
 import { useParams, Link } from "react-router-dom";
 import ProductItem from "../productItem/ProductItem";
 export default function ProductDetail() {
-<<<<<<< HEAD
   const params = useParams();
   const state = useContext(GlobalState);
   const [products] = state.productsAPI.products;
   const [ProductDetail, setProductDetail] = useState([]);
   const [EditProductDetail, setEditProductDetail] = useState([]);
   const [value, setValue] = useState([]);
+
   const text = useRef(["I am editable"]);
   const name = useRef("");
   console.log(text.current);
-=======
-    const params = useParams()
-    const state = useContext(GlobalState)
-    const [products] = state.productsAPI.products
-    const [ProductDetail,setProductDetail] = useState([])
-    const [EditProductDetail,setEditProductDetail] = useState([])
-    const [value,setValue] = useState([])
-    
-    const text = useRef(["I am editable"]);
-    const name = useRef('')
-    console.log(text.current)
-    
-    const handleChange = evt => {
-        text.current = evt.target.value;
-        name.current = evt.target
-        setValue(text.current)
-    };
->>>>>>> 2e098ca6f5844490e1deab7117360366c14725db
 
   const handleChange = (evt) => {
     text.current = evt.target.value;
