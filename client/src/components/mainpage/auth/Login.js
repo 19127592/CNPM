@@ -57,7 +57,7 @@ export default function Login() {
               <Link to="/register">Register</Link>
             </button>
             <div className="passwordforgot">
-              <Link to="/forgotpassword">Forgot password?</Link>
+              <Link to="/forgot-password">Forgot password?</Link>
             </div>
           </div>
         </form>

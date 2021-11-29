@@ -1,0 +1,57 @@
+.account{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.account .dropdown{
+    width: 20%;
+}
+.account .per-info{
+    width: 80%;
+}
+
+.account .dropdown .detail{
+    display: block;
+    margin: 20px;
+}
+.account .per-info .label{
+    font-size: 25px;
+    text-align: center;
+}
+.account .per-info .form{
+    margin: 20px;
+    font-size: 21px;
+}
+
+.account .per-info .form .info{
+    margin: 45px;
+    display: flex;
+    align-items: center;
+
+}
+.account .per-info .form .info .display{
+    width: 70%;
+    border: 1px solid rgb(221, 221, 221);
+}
+.account .per-info .form .info label{
+    width: 200px;
+    
+}
+.account .per-info button{
+    width: 200px;
+    height: 40px;
+    background: #555;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    position: relative;
+    left: 245px;
+}
+.account .per-info .form .info .input-infor{
+    width: 100%;
+    overflow: hidden;
+    font-size: 20px;
+    
+}

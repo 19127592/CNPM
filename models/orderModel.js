@@ -1,10 +1,6 @@
 const mongoose = require("mongoose");
 const orderSchema = new mongoose.Schema(
   {
-    seller:{
-      type: String,
-      default: "RookieSE"
-    },
     ship_fee:{
         type:Number,
         default: 5,
@@ -26,6 +22,10 @@ const orderSchema = new mongoose.Schema(
     user_information:{
         type: Object,
         require: true,
+    },
+    total:{
+      type: Number,
+      require: true,
     }
   },
   {

@@ -56,3 +56,5 @@ button{
 @import url("./components/mainpage/DataManagment/EditProduct.css");
 
 @import url("./components/mainpage/DataManagment/CreateProduct.css");
+
+@import url("./components/mainpage/user/User.css");

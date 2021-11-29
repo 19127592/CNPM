@@ -49,6 +49,7 @@ export default function Payment() {
 
     /* Add address confirmation */
     if (window.confirm(message + message1 + message2) === true) {
+      order.total = totalCash
       if (order.payment === "Paypal") {
         setPayment(true);
         window.alert(
@@ -63,7 +64,7 @@ export default function Payment() {
     }
   };
   const savedbOrder = async () => {
-    console.log(payment);
+    
     await axios.post(
       "/user/addOrder",
       { ...order },

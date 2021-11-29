@@ -13,10 +13,7 @@ class APIfeatures {
     excludedFields.forEach((el) => delete queryObj[el]);
 
     let queryStr = JSON.stringify(queryObj);
-    queryStr = queryStr.replace(
-      /\b(gte|gt|lt|lte|regex)\b/g,
-      (match) => "$" + match
-    );
+    queryStr = queryStr.replace(/\b(gte|gt|lt|lte|regex)\b/g,(match) => "$" + match);
 
     //    gte = greater than or equal
     //    lte = lesser than or equal
@@ -40,7 +37,7 @@ class APIfeatures {
 
   paginating() {
     const page = this.queryString.page * 1 || 1;
-    const limit = this.queryString.limit * 1 || 9;
+    const limit = this.queryString.limit * 1 || 8;
     const skip = (page - 1) * limit;
     this.query = this.query.skip(skip).limit(limit);
     return this;

@@ -1,7 +1,7 @@
 const Users = require('../models/userModel')
 const Order = require('../models/orderModel')
 const crypto = require('crypto')
-const bcrypt = require('bcrypt')
+
 const jwt = require('jsonwebtoken')
 var check = false
 class APIfeatures {
@@ -11,6 +11,21 @@ class APIfeatures {
     }
 }
 const userCtrl = {
+    getOrder: async(req,res) => {
+        try {
+            console.log("Working")
+            const features = new APIfeatures(Order.find(), req.query)
+
+            const orders = await features.query
+            res.json({
+                status: 'success',
+                result: orders.length,
+                orders: orders
+            })
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    },
     getUsers: async(req,res) => {
         try {
             console.log("Working")
@@ -32,10 +47,10 @@ const userCtrl = {
             const user = await Users.findOne({ email })
             if (user) return res.status(400).json({ msg: "The email already exists." })
             if (password != "") {
-                if ((/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,10}$/.test(password))) {
+                if ((/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,14}$/.test(password))) {
                     check = true
                 } else {
-                    return res.status(400).json({ msg: "Minimum eight and maximum 10 characters, at least one uppercase letter, one lowercase letter, one number and one special character:" })
+                    return res.status(400).json({ msg: "Minimum 6 and maximum 10 characters, at least one uppercase letter, one lowercase letter, one number and one special character:" })
                 }
             } else return res.status(400).json({ msg: "Fill the password, please." })
                 //Password Encryption
@@ -105,12 +120,31 @@ const userCtrl = {
     },
     getUser: async(req, res) => {
         try {
-            const user = await Users.findById(req.user.id).select('-password')
+            const user = await Users.findById(req.user.id)
             if (!user) return res.status(400).json({ msg: "User does not exist." })
             res.json(user)
         } catch (err) {
             return res.status(500).json({ msg: err.message })
         }
+    },
+    updateAccount: async(req,res) => {
+        try {
+            const { name, email, address, phone,password } = req.body.infor;
+            
+            await Users.findOneAndUpdate(
+              { _id: req.body.infor._id },
+              {
+                name,
+                email,
+                address, 
+                phone,
+                password
+              }
+            );
+            res.json({ msg: "Updated user" });
+          } catch (err) {
+            return res.status(400).json({ msg: err.message });
+          }
     },
     updateRole: async(req,res) => {
         try {
@@ -167,7 +201,7 @@ const userCtrl = {
     saveOrder: async(req,res) => {
         try {
             
-            const {ship_fee,payment, delivery_time, progress} = req.body
+            const {ship_fee,payment, delivery_time, progress,total} = req.body
             
             const newOrder = new Order({
                 ship_fee,
@@ -175,7 +209,7 @@ const userCtrl = {
                 delivery_time,
                 progress,
                 user_information: req.body.user_information,
-                
+                total
             })
             newOrder.save()
         } catch (err) {

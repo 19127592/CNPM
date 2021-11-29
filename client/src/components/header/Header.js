@@ -41,6 +41,25 @@ export default function Header() {
                 </Link>
               </li>
               <li>
+                {
+                  !isAdmin ?
+                  <Link to="/account">
+                    Your account
+                  </Link>:
+                  ""
+                }
+                
+              </li>
+              <li>
+              {
+                  !isAdmin ?
+                  <Link to="/account/history">
+                    History Order
+                  </Link>:
+                  ""
+                }
+              </li>
+              <li>
                 <Link to="/" onClick={logOut}>
                   Logout
                 </Link>

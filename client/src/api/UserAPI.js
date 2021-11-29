@@ -8,10 +8,17 @@ export default function UserAPI(token) {
     const [cart,setCart] = useState([])
     const [infor,setInfor] = useState([])
     const [users,setUsers] = useState([])
+    const [orders,setOrders] = useState([])
 
     const getUsers = async () => {
         const res = await axios.get('/user/users')
         setUsers(res.data.users)
+    }
+    const getOrder = async () => {
+        const res = await axios.get('/user/order',{
+            headers: {Authorization: token}
+        })
+        setOrders(res.data.orders)
     }
     useEffect(()=> {
         if(token){
@@ -33,6 +40,7 @@ export default function UserAPI(token) {
             }
             getUser()
             getUsers()
+            getOrder()
             
         }
     },[token])
@@ -60,6 +68,7 @@ export default function UserAPI(token) {
         cart: [cart, setCart],
         infor:[infor,setInfor],
         users:[users,setUsers],
+        orders:[orders,setOrders],
         addToCart:addCart
     }
 }

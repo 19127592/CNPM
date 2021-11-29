@@ -3,6 +3,7 @@ import {GlobalState} from '../../../GlobalState'
 import ProductItem from '../productItem/ProductItem'
 import Loading from '../other/loading/Loading'
 import Filters from './Filter'
+import Pages from './Pagination'
 export default function Products() {
     const state = useContext(GlobalState)
     const [products] = state.productsAPI.products
@@ -21,6 +22,7 @@ export default function Products() {
             }
         </div>
         {products.length === 0 && <Loading/>}
+        <Pages/>
         </>
     )
 }

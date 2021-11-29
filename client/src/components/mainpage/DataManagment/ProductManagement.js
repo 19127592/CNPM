@@ -73,9 +73,15 @@ export default function ProductManagment() {
     return (
         <div>
           <div className='product-mod'>
-            <Link to="/user-management">
+            {
+              isAdmin?
+              <Link to="/user-management">
               <button class="button-3" role="button">User Management</button>
-            </Link>
+              </Link>:
+              <div>
+                </div>
+            }
+            
             
             <div class="icon facebook">
             <div class="tooltip">
