@@ -1,32 +1,34 @@
-*{
+* {
   padding: 0;
   box-sizing: border-box;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-.App{
-  max-width: 100%;
+.App {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   margin: 0 auto;
   padding: 0 100px;
   box-shadow: 0 0 35px #eee;
 }
-a{
+a {
   text-decoration: none;
 }
-ul li{
+ul li {
   list-style: none;
 }
-button{
+button {
   border: none;
   outline: none;
   background: transparent;
@@ -35,7 +37,6 @@ button{
 
 /*---------Header------------*/
 @import url("./components/header/header.css");
-
 
 /*---------Products------------*/
 @import url("./components/mainpage/products/products.css");
@@ -58,3 +59,12 @@ button{
 @import url("./components/mainpage/DataManagment/CreateProduct.css");
 
 @import url("./components/mainpage/user/User.css");
+
+/*---------Footer------------*/
+@import url("./components/footer/footer.css");
+
+/*---------Historyorder------------*/
+@import url("./components/mainpage/history/historyorder.css");
+
+/*---------ChangePassword------------*/
+@import url("./components/mainpage/ChangePassword/changepassword.css");

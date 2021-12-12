@@ -40,24 +40,13 @@ export default function Header() {
                     : userControl()}
                 </Link>
               </li>
+              <li>{!isAdmin ? <Link to="/account">Your account</Link> : ""}</li>
               <li>
-                {
-                  !isAdmin ?
-                  <Link to="/account">
-                    Your account
-                  </Link>:
+                {!isAdmin ? (
+                  <Link to="/account/history">History Order</Link>
+                ) : (
                   ""
-                }
-                
-              </li>
-              <li>
-              {
-                  !isAdmin ?
-                  <Link to="/account/history">
-                    History Order
-                  </Link>:
-                  ""
-                }
+                )}
               </li>
               <li>
                 <Link to="/" onClick={logOut}>
@@ -153,7 +142,6 @@ export default function Header() {
             value={search}
             onChange={(e) => setSearch(e.target.value.toLowerCase())}
           />
-          <input type="submit" name="" className="search-btn" />
         </form>
       </div>
       <ul>
