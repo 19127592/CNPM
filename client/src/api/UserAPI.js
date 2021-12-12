@@ -14,10 +14,11 @@ export default function UserAPI(token) {
         const res = await axios.get('/user/users')
         setUsers(res.data.users)
     }
-    const getOrder = async () => {
+    const getOrder = async (infor) => {
         const res = await axios.get('/user/order',{
             headers: {Authorization: token}
         })
+        console.log(infor)
         setOrders(res.data.orders)
     }
     useEffect(()=> {
@@ -40,7 +41,7 @@ export default function UserAPI(token) {
             }
             getUser()
             getUsers()
-            getOrder()
+            getOrder(infor)
             
         }
     },[token])

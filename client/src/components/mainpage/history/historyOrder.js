@@ -11,8 +11,20 @@ function Cart() {
   const [token] = state.token;
   const [total, setTotal] = useState(0);
   const [order, setOrder] = state.userAPI.orders;
+  const [infor,setInfor] = state.userAPI.infor;
 
-  console.log(order);
+  useEffect(()=> {
+    
+    const filterOrder = () => {
+        order.forEach((item,index) => {
+          if(item.user_information._id !== infor._id){
+            order.splice(index,1)
+          }
+        })
+        setOrder([...order])
+    }
+    filterOrder()
+  })
 
   const dateHandle = (time) => {
     const date = new Date(time);
