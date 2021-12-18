@@ -64,11 +64,9 @@ export default function Header() {
     return (
       <>
         <li>
-          <Link to="/">Your order</Link>
+          <Link to="/cart">Your Cart</Link>
         </li>
-        <li>
-          <Link to="/">Oder history</Link>
-        </li>
+        
       </>
     );
   };
