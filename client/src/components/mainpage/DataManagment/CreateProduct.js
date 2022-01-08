@@ -136,6 +136,7 @@ function CreateProduct() {
           }
         );
       } else {
+        window.alert("Add product successfully")
         await axios.post(
           "/api/products",
           { ...product, images },
