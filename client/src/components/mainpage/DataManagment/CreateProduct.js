@@ -218,7 +218,9 @@ function CreateProduct() {
           />
         </div>
         <div className="row">
-          <label htmlFor="category">Category</label>
+          <label htmlFor="category" class="phanloai">
+            Category
+          </label>
           <select class="role" name="category" onChange={handleChangeInput}>
             <option label="Laptop" value="laptop">
               Laptop
