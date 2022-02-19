@@ -3,7 +3,7 @@ import {Switch,Route} from 'react-router-dom'
 import { GlobalState } from "../../GlobalState";
 //Products
 import HomePage from './HomePage/HomePage'
-import ProductDetail from './ProductDetail/ProductDetail'
+import ProductDetail from './productDetail/ProductDetail'
 
 //Authentication
 import Login from './Account/Authentication/Login'
@@ -17,8 +17,8 @@ import ForgotPass from './Account/PasswordChange/Forgot'
 import ChangePass from './Account/PasswordChange/Change'
 
 //Shopping
-import Cart from './Cart/Cart'
-import Checkout from './Cart/Checkout'
+import Cart from './cart/Cart'
+import Checkout from './cart/Checkout'
 
 //Order
 import Purchased from './Account/Order/Purchased/Purchased'
