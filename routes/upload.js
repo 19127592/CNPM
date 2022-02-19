@@ -12,11 +12,12 @@ cloudinary.config({
 
 router.post('/upload', (req, res) => {
     try {
-        console.log(req.files)
+        console.log(req.files.file)
         if (!req.files || Object.keys(req.files).length === 0) return res.status(400).send('No files were uploaded.')
         const file = req.files.file;
 
         // @ts-ignore
+        //for (const file of files){
         if (file.size > 1024 * 1024) {
             // @ts-ignore
             removeTmp(file.tempFilePath)
@@ -26,16 +27,17 @@ router.post('/upload', (req, res) => {
         if (file.mimetype !== "image/jpeg" && file.mimetype !== 'image/png') {
             // @ts-ignore
             removeTmp(file.tempFilePath)
-            return res.status(400).json({ msg: "File format incorrect." })
+            return res.status(400).json({ msg: "File format is incorrect." })
         }
         // @ts-ignore
-        cloudinary.uploader.upload(file.tempFilePath, { folder: "test" }, async(err, result) => {
+        //cloudinary.uploader.upload(file.tempFilePath, { folder: `test/${file.name}` }, async(err, result) => {
+        cloudinary.uploader.upload(file.tempFilePath, { folder: `test` }, async(err, result) => {
             if (err) throw err
                 // @ts-ignore
             removeTmp(file.tempFilePath)
 
             res.json({ public_id: result.public_id, url: result.secure_url })
-        })
+        })//}
     } catch (err) {
         return res.status(400).json({ msg: err.message })
     }

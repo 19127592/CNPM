@@ -1,33 +1,31 @@
-import {useState,useEffect} from 'react'
+import {useState, useEffect} from 'react'
 import axios from 'axios'
-function ProductsAPI() {
-    const [products,setProducts] = useState([])
-    const [callback, setCallback] = useState(false)
-    const [sort, setSort] = useState('')
-    const [category, setCategory] = useState('')
-    const [page, setPage] = useState(1)
-    const [search, setSearch] = useState('')
-    const [result, setResult] = useState(0)
-    useEffect(() => {
-        const getProducts = async () => {
-            console.log(category)
-            const res = await axios.get(`/api/products?limit=${page*8}&${category}&${sort}&title[regex]=${search}`)
-            
-            setProducts(res.data.products)
-            setResult(res.data.result)
-        }
 
+
+function ProductsAPI() {
+    const [products, setProducts] = useState([])
+    
+    
+    const [search, setSearch] = useState('')
+    
+
+    useEffect(() =>{
+        const getProducts = async () => {
+            
+            const res = await axios.get(`/api/products`)
+            console.log(res)
+            setProducts(res.data.products)
+
+        }
         getProducts()
-        
-    },[callback,sort,category,search,page])
+    },[ search])
+    
     return {
-        products: [products,setProducts],
-        callback: [callback, setCallback],
-        category: [category, setCategory],
+        products: [products, setProducts],
+        
         search: [search, setSearch],
-        page: [page, setPage],
-        result: [result, setResult],
-        sort: [sort, setSort],
+        
     }
 }
+
 export default ProductsAPI

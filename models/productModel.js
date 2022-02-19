@@ -1,10 +1,6 @@
 const mongoose = require("mongoose");
 const productSchema = new mongoose.Schema(
   {
-    seller:{
-      type: String,
-      require: true,
-    },
     product_id: {
       type: String,
       require: true,
@@ -18,11 +14,7 @@ const productSchema = new mongoose.Schema(
       type: Number,
       require: true,
     },
-    description: {
-      type: String,
-      require: true,
-    },
-    content: {
+    brand: {
       type: String,
       require: true,
     },
@@ -34,16 +26,13 @@ const productSchema = new mongoose.Schema(
       type: String,
       require: true,
     },
-    checked: {
-      type: Boolean,
-      default: false,
+    maintenance_time:{
+      type: Number,
+      requrire: true
     },
     sold: {
       type: Number,
       default: 0,
-    },
-    brand: {
-      type: String,
     },
     //Detail
     CPU: {
@@ -55,27 +44,62 @@ const productSchema = new mongoose.Schema(
     RAM: {
       type: String,
     },
-    Bluetooth:{
-      type: Number,
-    },
-    OS:{
-      type: String,
-    },
     GPU:{
       type: String,
-    },
-    DoR: {
-      type: Date,
-    },
-    BatteryCapacity:{
-      type: Number,
-    },
-    Weight:{
-      type: Number,
     },
     Material:{
       type: String
     },
+    DataStorage:{
+      type: String
+    },
+    ConnectionType:{
+      type: String
+    },
+    Weight:{
+      type: String,
+    },
+    Color:{
+      type: String,
+    },
+    //Monitor
+    Panel:{
+      type: String,
+    },
+    Resolution:{
+      type: String,
+    },
+    RefreshRate:{
+      type: String,
+    },
+    Response:{
+      type: String,
+    },
+    TechSync:{
+      type: String,
+    },
+    Bright:{
+      type: String,
+    },
+    Contrast:{
+      type: String,
+    },
+    //Keyboard
+    Switch:{
+      type: String,
+    },
+    RGB:{
+      type: Boolean,
+      default: false
+    },
+    //Headphone
+    Type:{
+      type: String,
+    },
+    //Mouse
+    DPI:{
+      type: String,
+    }
   },
   {
     timestamps: true,

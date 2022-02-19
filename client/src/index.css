@@ -38,33 +38,17 @@ button {
 /*---------Header------------*/
 @import url("./components/header/header.css");
 
-/*---------Products------------*/
-@import url("./components/mainpage/products/products.css");
+/*---------Home Page------------*/
+@import url("./components/mainpage/HomePage/HomePage.css");
 
-/*---------Detail Product------------*/
-@import url("./components/mainpage/productDetail/ProductDetail.css");
+/*---------Authentication------------*/
+@import url("./components/mainpage/Account/Authentication/Authentication.css");
 
-/*---------Login/Register-----------*/
-@import url("./components/mainpage/auth/Login.css");
+/*---------Product Detail------------*/
+@import url("./components/mainpage/ProductDetail/ProductDetail.css");
 
-/*---------Cart-----------*/
-@import url("./components/mainpage/cart/cart.css");
+/*---------Order------------*/
+@import url("./components/mainpage/Account/Order/Purchased/purchase.css");
 
-@import url("./components/mainpage/payment/payment.css");
-
-@import url("./components/mainpage/DataManagment/UserManagement.css");
-
-@import url("./components/mainpage/DataManagment/EditProduct.css");
-
-@import url("./components/mainpage/DataManagment/CreateProduct.css");
-
-@import url("./components/mainpage/user/User.css");
-
-/*---------Footer------------*/
-@import url("./components/footer/footer.css");
-
-/*---------Historyorder------------*/
-@import url("./components/mainpage/history/historyorder.css");
-
-/*---------ChangePassword------------*/
-@import url("./components/mainpage/ChangePassword/changepassword.css");
+/*---------Product Box UI------------*/
+@import url("./components/mainpage/HomePage/ProductBoxUI/ProductBoxUI.css");
