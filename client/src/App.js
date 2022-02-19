@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { DataProvider } from "./GlobalState";
-import Header from "./components/header/Header";
-import Mainpages from "./components/mainpage/Pages";
+import Header from './components/header/Header'
+import Mainpages from "./components/mainpage/Path";
 import Footer from "./components/footer/Footer";
 function App() {
   return (

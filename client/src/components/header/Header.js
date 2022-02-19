@@ -4,13 +4,18 @@ import Menu from "./menu.svg";
 import Close from "./close.svg";
 import Cart from "./cart.svg";
 import User from "./user.svg";
+import Admin from "./admin.svg"
+import Order from "./order.svg"
+import Notif from "./notif.svg"
+import Login from "./login.svg"
+import Discount from "./discount.svg"
 import { Link } from "react-router-dom";
 import axios from "axios";
 export default function Header() {
   const state = useContext(GlobalState);
   const [isLogged] = state.userAPI.isLogged;
   const [isAdmin] = state.userAPI.isAdmin;
-  const [isSeller] = state.userAPI.isSeller;
+
   const [cart] = state.userAPI.cart;
   const [search, setSearch] = state.productsAPI.search;
   const logOut = async () => {
@@ -25,18 +30,54 @@ export default function Header() {
     return (
       <>
         <li>
+          <Link to="/discount">
           <div className="usericon">
-            <div className="icon">
-              <img src={User} alt="" width="30" />
-              <p>{infor.name}</p>
+            {isAdmin ? "" :
+              <div className="icon">
+              <img src={Discount} alt="" width="35" />
             </div>
+            }
+          </div>
+          </Link>
+        </li>
+        <li>
+        <div className="usericon">
+          {isAdmin ? "" :
+            <div className="icon">
+            <img src={Order} alt="" width="35" />
+          </div>
+          }
+        </div>
+        </li>
+        
+        {!isLogged ? 
+          <li>
+            <Link to="/account/login">
+              <div className="usericon">
+                <div className="icon">
+                  <img src={Login} alt="" width="35" />
+                </div>
+              </div>
+            </Link>
+          </li>
+        : <li>
+            <div className="usericon">
+            
+            {isAdmin ? 
+              <div className="icon">
+                <img src={Admin} alt="" width="35" />
+              </div>
+            :
+              <div className="icon">
+                <img src={User} alt="" width="35" />
+              </div>
+              
+            }
             <div className="dropdown-menu">
               <li>
                 <Link to="/">
                   {isAdmin
                     ? adminControl2()
-                    : isSeller
-                    ? sellerControl2()
                     : userControl()}
                 </Link>
               </li>
@@ -55,7 +96,20 @@ export default function Header() {
               </li>
             </div>
           </div>
-        </li>
+          </li>
+        }
+          <li>
+            <div className="usericon">
+              <div className="icon">
+                  <img src={Notif} alt="" width="35" />
+              </div>
+              <div className="dropdown-menu">
+                <li>
+                  Notification Components
+                </li>
+              </div>
+            </div>
+          </li>
       </>
     );
   };
@@ -66,30 +120,12 @@ export default function Header() {
         <li>
           <Link to="/cart">Your Cart</Link>
         </li>
-        
       </>
     );
   };
 
-  const sellerControl2 = () => {
-    return (
-      <>
-        <li>
-          <Link to="/product-management">Shop management</Link>
-        </li>
-      </>
-    );
-  };
 
-  const sellerControl = () => {
-    return (
-      <>
-        <li>
-          <Link to="/product-management">Your shop</Link>
-        </li>
-      </>
-    );
-  };
+
   /*create product nam trong product management */
 
   const adminControl = () => {
@@ -126,7 +162,7 @@ export default function Header() {
       <div className="logo">
         <h1>
           <Link to="/">
-            {isAdmin ? "Admin" : isSeller ? "Seller" : "rookieSE"}
+            {isAdmin ? "Admin" : "rookieSE"}
           </Link>
         </h1>
       </div>
@@ -145,23 +181,21 @@ export default function Header() {
       <ul>
         <li>
           <Link to="/">
-            {isAdmin ? adminControl() : isSeller ? sellerControl() : "Product"}
+            {isAdmin ? adminControl() : ""}
           </Link>
         </li>
-        {isLogged ? (
+        {
           loggedControl()
-        ) : (
-          <li>
-            <Link to="/login">Login & Register</Link>
-          </li>
-        )}
+        }
         <li>
           <img src={Close} alt="" width="30" className="menu" />
-          <div className="cart-icon">
-            <span>{cart.length}</span>
-            <Link to="/cart">
-              <img src={Cart} alt="" width="30" />
-            </Link>
+          <div className="icon">
+            <div className="cart-icon">
+              <span>{cart.length}</span>
+              <Link to="/cart">
+                <img src={Cart} alt="" width="33" />
+              </Link>
+            </div>
           </div>
         </li>
       </ul>

@@ -13,7 +13,7 @@ class APIfeatures {
     excludedFields.forEach((el) => delete queryObj[el]);
 
     let queryStr = JSON.stringify(queryObj);
-    queryStr = queryStr.replace(/\b(gte|gt|lt|lte|regex)\b/g,(match) => "$" + match);
+    queryStr = queryStr.replace(/\b(gte|gt|lt|lte|regex)\b/g,(match) => "đ" + match);
 
     //    gte = greater than or equal
     //    lte = lesser than or equal
@@ -69,14 +69,33 @@ const productCtrl = {
         product_id,
         title,
         price,
-        description,
-        content,
+        brand,
         images,
         category,
-        brand,
-        seller,
+        maintenance_time,
+        sold,
+        CPU,
+        Screen,
+        RAM,
+        GPU,
+        Material,
+        DataStorage,
+        ConnectionType,
+        Weight,
+        Color,
+        Panel,
+        Resolution,
+        RefreshRate,
+        Response,
+        TechSync,
+        Bright,
+        Contrast,
+        Switch,
+        RGB,
+        Type,
+        DPI
       } = req.body;
-      if (!images) return res.status(400).json({ msg: "No image upload" });
+      //if (!images) return res.status(400).json({ msg: "No image upload" });
       const product = await Products.findOne({ product_id });
       if (product)
         return res.status(400).json({ msg: "This product already exists" });
@@ -84,14 +103,32 @@ const productCtrl = {
         product_id,
         title: title.toLowerCase(),
         price,
-        description,
-        content,
+        brand,
         images,
         category,
-        brand,
-        seller,
+        maintenance_time,
+        sold,
+        CPU,
+        Screen,
+        RAM,
+        GPU,
+        Material,
+        DataStorage,
+        ConnectionType,
+        Weight,
+        Color,
+        Panel,
+        Resolution,
+        RefreshRate,
+        Response,
+        TechSync,
+        Bright,
+        Contrast,
+        Switch,
+        RGB,
+        Type,
+        DPI
       });
-      console.log("Create a product");
       await newProduct.save();
       res.json({ msg: "Create a product" });
     } catch (err) {
@@ -113,15 +150,24 @@ const productCtrl = {
       if (!images) return res.status(400).json({ msg: "No images uploaded" });
       await Products.findOneAndUpdate(
         { _id: req.params.id },
-        {
-          title: title,
-          price,
-          description,
-          content,
-          images,
-          category,
-          brand,
-        }
+          {
+            title: title,
+            price,
+            brand,
+            images,
+            category,
+            maintenance_time,
+            sold,
+            CPU,
+            Screen,
+            RAM,
+            GPU,
+            Material,
+            DataStorage,
+            ConnectionType,
+            Weight,
+            Color
+          }
       );
       res.json({ msg: "Updated product" });
     } catch (err) {

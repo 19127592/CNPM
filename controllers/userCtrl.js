@@ -92,6 +92,7 @@ const userCtrl = {
                 path: '/user/refresh_token'
             })
             res.json({ accesstoken })
+            console.log("Login")
         } catch (err) {
             return res.status(500).json({ msg: err.message })
         }
